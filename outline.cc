@@ -13,9 +13,6 @@ using std::min;
 using std::remove_if;
 using std::swap;
 
-#include <array>
-using std::array;
-
 #include <exception>
 using std::exception;
 
@@ -37,12 +34,6 @@ using std::istreambuf_iterator;
 
 #include <ostream>
 using std::ostream;
-
-#include <set>
-using std::set;
-
-#include <stdexcept>
-using std::runtime_error;
 
 #include <string>
 using std::string;
