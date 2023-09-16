@@ -8,34 +8,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <exception>
-using std::exception;
-
-#include <fstream>
-using std::ifstream;
-using std::ofstream;
-
-#include <iomanip>
-using std::setw;
-
-#include <iostream>
-using std::cout;
-
-#include <iterator>
-using std::istreambuf_iterator;
-
-#include <ostream>
-using std::ostream;
-
-#include <string>
-using std::string;
-
-#include <vector>
-using std::vector;
-
 #ifdef _WIN32
 #include <windows.h>
 #endif
+
+#include <exception>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <ostream>
+#include <string>
+#include <vector>
+using namespace std;
 
 #ifdef NDEBUG
 #define debug(a)
