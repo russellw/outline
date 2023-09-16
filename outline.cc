@@ -63,17 +63,6 @@ using std::vector;
 #define debug(a) cout << __FILE__ << ':' << __LINE__ << ": " << __func__ << ": " << #a << ": " << a << '\n'
 #endif
 
-// a lot of output syntax uses comma separators
-struct Separator {
-	bool subsequent = 0;
-
-	bool operator()() {
-		auto a = subsequent;
-		subsequent = 1;
-		return a;
-	}
-};
-
 // input
 string file;
 string text;
@@ -102,74 +91,12 @@ void readLines() {
 	}
 }
 
-void pread(string cmd) {
-	auto f = _popen(cmd.data(), "r");
-	if (!f)
-		throw runtime_error(cmd + ": " + strerror(errno));
-	text.clear();
-	for (;;) {
-		auto c = fgetc(f);
-		if (c < 0) {
-			auto r = _pclose(f);
-			if (r)
-				throw runtime_error(cmd + ": " + to_string(r));
-			return;
-		}
-		text += c;
-	}
-}
-
 // SORT
 bool endsWith(string s, const char* t) {
 	auto n = strlen(t);
 	if (s.size() < n)
 		return 0;
 	return memcmp(s.data() + s.size() - n, t, n) == 0;
-}
-
-inline bool eq(const char* s, const char* t) {
-	for (auto i = strlen(t); i--;)
-		if (*s++ != *t++)
-			return 0;
-	return 1;
-}
-
-string esc(string s) {
-	string o = "\"";
-	for (auto c: s) {
-		if (isprint((unsigned char)c)) {
-			if (c == '"')
-				o += '\\';
-			o += c;
-			continue;
-		}
-		char buf[7];
-		sprintf(buf, "\\x%02x\"\"", (unsigned char)c);
-		o += buf;
-	}
-	return o + '"';
-}
-
-int indent(int i) {
-	// end of file is end of scope, so semantically a dedent
-	if (i == V.size())
-		return -1;
-
-	auto s = V[i];
-
-	// blank line does not meaningfully have an indent level
-	if (s.empty())
-		return INT_MAX;
-
-	// in C++, nor does a preprocessor directive
-	if (s[0] == '#')
-		return INT_MAX;
-
-	// assuming each file uses either tabs or spaces consistently
-	int j = 0;
-	while (s[j] == '\t' || s[j] == ' ')
-		++j;
-	return j;
 }
 
 bool startsWith(string s, const char* t) {
@@ -192,8 +119,10 @@ void writeLines() {
 
 int main(int argc, char** argv) {
 	try {
-		if (argc < 2)
+		if (argc < 2 || argv[1][0] == '-') {
+			cout << "Usage: outline <file>\n";
 			return 1;
+		}
 		file = argv[1];
 		readLines();
 		bool blockComment = 0;
