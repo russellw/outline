@@ -1,4 +1,3 @@
-// C headers
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
@@ -8,7 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// C++ headers
 #include <algorithm>
 using std::max;
 using std::min;
@@ -59,7 +57,6 @@ using std::unordered_set;
 #include <vector>
 using std::vector;
 
-// debug
 #ifdef NDEBUG
 #define debug(a)
 #else
@@ -76,14 +73,6 @@ struct Separator {
 		return a;
 	}
 };
-
-// SORT
-inline bool eq(const char* s, const char* t) {
-	for (auto i = strlen(t); i--;)
-		if (*s++ != *t++)
-			return 0;
-	return 1;
-}
 
 // input
 string file;
@@ -130,14 +119,14 @@ void pread(string cmd) {
 	}
 }
 
-// output
-void writeLines() {
-	ofstream os(file, std::ios::binary);
-	for (auto s: V)
-		os << s << '\n';
+// SORT
+inline bool eq(const char* s, const char* t) {
+	for (auto i = strlen(t); i--;)
+		if (*s++ != *t++)
+			return 0;
+	return 1;
 }
 
-// SORT
 bool endsWith(string s, const char* t) {
 	auto n = strlen(t);
 	if (s.size() < n)
@@ -188,6 +177,13 @@ bool startsWith(string s, const char* t) {
 	if (s.size() < n)
 		return 0;
 	return memcmp(s.data(), t, n) == 0;
+}
+
+// output
+void writeLines() {
+	ofstream os(file, std::ios::binary);
+	for (auto s: V)
+		os << s << '\n';
 }
 
 #ifdef _WIN32
