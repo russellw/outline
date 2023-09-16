@@ -48,14 +48,12 @@ using std::runtime_error;
 using std::string;
 using std::to_string;
 
-#include <unordered_map>
-using std::unordered_map;
-
-#include <unordered_set>
-using std::unordered_set;
-
 #include <vector>
 using std::vector;
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #ifdef NDEBUG
 #define debug(a)
@@ -106,17 +104,7 @@ bool startsWith(string s, const char* t) {
 	return memcmp(s.data(), t, n) == 0;
 }
 
-// output
-void writeLines() {
-	ofstream os(file, std::ios::binary);
-	for (auto s: V)
-		os << s << '\n';
-}
-
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
+// main
 int main(int argc, char** argv) {
 	try {
 		if (argc < 2 || argv[1][0] == '-') {
