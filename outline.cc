@@ -120,18 +120,18 @@ void pread(string cmd) {
 }
 
 // SORT
-inline bool eq(const char* s, const char* t) {
-	for (auto i = strlen(t); i--;)
-		if (*s++ != *t++)
-			return 0;
-	return 1;
-}
-
 bool endsWith(string s, const char* t) {
 	auto n = strlen(t);
 	if (s.size() < n)
 		return 0;
 	return memcmp(s.data() + s.size() - n, t, n) == 0;
+}
+
+inline bool eq(const char* s, const char* t) {
+	for (auto i = strlen(t); i--;)
+		if (*s++ != *t++)
+			return 0;
+	return 1;
 }
 
 string esc(string s) {
