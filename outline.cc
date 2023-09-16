@@ -16,9 +16,6 @@ using std::swap;
 #include <exception>
 using std::exception;
 
-#include <filesystem>
-using std::filesystem::path;
-
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
@@ -37,7 +34,6 @@ using std::ostream;
 
 #include <string>
 using std::string;
-using std::to_string;
 
 #include <vector>
 using std::vector;
@@ -81,14 +77,14 @@ void readLines() {
 }
 
 // SORT
-bool endsWith(string s, const char* t) {
+bool endsWith(const string& s, const char* t) {
 	auto n = strlen(t);
 	if (s.size() < n)
 		return 0;
 	return memcmp(s.data() + s.size() - n, t, n) == 0;
 }
 
-bool startsWith(string s, const char* t) {
+bool startsWith(const string& s, const char* t) {
 	auto n = strlen(t);
 	if (s.size() < n)
 		return 0;
@@ -109,7 +105,7 @@ int main(int argc, char** argv) {
 		auto console = GetStdHandle(STD_OUTPUT_HANDLE);
 #endif
 		int i = 0;
-		for (auto s: V) {
+		for (auto& s: V) {
 			++i;
 
 			// skip blank lines
