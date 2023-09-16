@@ -7,12 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <algorithm>
-using std::max;
-using std::min;
-using std::remove_if;
-using std::swap;
-
 #include <exception>
 using std::exception;
 
